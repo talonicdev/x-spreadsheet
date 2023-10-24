@@ -49,7 +49,7 @@ function renderCellBorders(bboxes, translateFunc) {
 }
 */
 
-export function renderCell(draw, data, rindex, cindex, yoffset = 0) {
+export function renderCell(draw, data, rindex, cindex, yoffset = 0) { //console.log("renderCell:",rindex,cindex);
   const { sortedRowMap, rows, cols } = data;
   if (rows.isHide(rindex) || cols.isHide(cindex)) return;
   let nrindex = rindex;
@@ -57,14 +57,14 @@ export function renderCell(draw, data, rindex, cindex, yoffset = 0) {
     nrindex = sortedRowMap.get(rindex);
   }
 
-  const cell = data.getCell(nrindex, cindex);
+  const cell = data.getCell(nrindex, cindex); //if(cell === null) console.log("not drawing:",nrindex,cindex);
   if (cell === null) return;
   let frozen = false;
   if ('editable' in cell && cell.editable === false) {
     frozen = true;
   }
 
-  const style = data.getCellStyleOrDefault(nrindex, cindex);
+  const style = data.getCellStyleOrDefault(nrindex, cindex); //console.log("gotten style:",nrindex,cindex,style.bgcolor);
   const dbox = getDrawBox(data, rindex, cindex, yoffset);
   dbox.bgcolor = style.bgcolor;
   if (style.border !== undefined) {

@@ -67,7 +67,7 @@ function scrollbarMove() {
   }
 }
 
-function selectorSet(multiple, ri, ci, indexesUpdated = true, moving = false) {
+function selectorSet(multiple, ri, ci, indexesUpdated = true, moving = false, initAdditionalRange = false) {
   if (ri === -1 && ci === -1) return;
   const {
     table, selector, toolbar, data,
@@ -75,11 +75,11 @@ function selectorSet(multiple, ri, ci, indexesUpdated = true, moving = false) {
   } = this;
   const cell = data.getCell(ri, ci);
   if (multiple) {
-    selector.setEnd(ri, ci, moving);
+    selector.setEnd(ri, ci, moving, initAdditionalRange);
     this.trigger('cells-selected', cell, selector.range);
   } else {
     // trigger click event
-    selector.set(ri, ci, indexesUpdated);
+    selector.set(ri, ci, indexesUpdated, initAdditionalRange);
     this.trigger('cell-selected', cell, ri, ci);
   }
   contextMenu.setMode((ri === -1 || ci === -1) ? 'row-col' : 'range');
@@ -405,12 +405,12 @@ function overlayerMousedown(evt) {
     if (isAutofillEl) {
       selector.showAutofill(ri, ci);
     } else {
-      selectorSet.call(this, false, ri, ci);
+      selectorSet.call(this, false, ri, ci, undefined, undefined, evt.ctrlKey);
     }
 
     // mouse move up
     mouseMoveUp(window, (e) => {
-      // console.log('mouseMoveUp::::');
+       //console.log('mouseMoveUp::::');
       ({ ri, ci } = data.getCellRectByXY(e.offsetX, e.offsetY));
       if (isAutofillEl) {
         selector.showAutofill(ri, ci);

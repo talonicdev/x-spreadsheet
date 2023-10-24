@@ -530,6 +530,11 @@ export default class DataProxy {
     this.clipboard.clear();
   }
 
+  setAdditionalRanges(aRanges) {
+    this.selector.ranges = aRanges;
+    return aRanges;
+  }
+
   calSelectedRangeByEnd(ri, ci) {
     const {
       selector, rows, cols, merges,
@@ -681,6 +686,15 @@ export default class DataProxy {
 
   getSelectedRect() {
     return this.getRect(this.selector.range);
+  }
+
+  getAdditionalRects() {
+    let rects = [];
+    for (var range of this.selector.ranges) {
+      let rect = this.getRect(range);
+      rects.push(rect);
+    }
+    return rects;
   }
 
   getClipboardRect() {
@@ -994,9 +1008,10 @@ export default class DataProxy {
     return (cell && cell.text) ? cell.text : '';
   }
 
-  getCellStyle(ri, ci) {
+  getCellStyle(ri, ci) { console.log("getCellStyle:",ri,ci);
     const cell = this.getCell(ri, ci);
     if (cell && cell.style !== undefined) {
+      return helper.merge({"bgcolor":"#009500"},this.styles[cell.style]); // #DEBUG BGColor Override
       return this.styles[cell.style];
     }
     return null;
@@ -1006,6 +1021,7 @@ export default class DataProxy {
     const { styles, rows } = this;
     const cell = rows.getCell(ri, ci);
     const cellStyle = (cell && cell.style !== undefined) ? styles[cell.style] : {};
+    cellStyle.bgcolor = "#ff0000";  // #DEBUG BGColor Override
     return helper.merge(this.defaultStyle(), cellStyle);
   }
 

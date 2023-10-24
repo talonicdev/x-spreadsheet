@@ -1,0 +1,32 @@
+{
+  "name": "rpm-custom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://pareshradadiya@bitbucket.org/fonemed/rpm-custom.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/fonemed/rpm-custom/issues"
+  },
+  "homepage": "https://bitbucket.org/fonemed/rpm-custom#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1247.0",
+    "crypto-js": "^4.1.1",
+    "mongodb": "^5.0.1",
+    "serverless-dotenv-plugin": "^4.0.2",
+    "serverless-plugin-common-excludes": "^4.0.0",
+    "serverless-plugin-include-dependencies": "^5.0.0",
+    "short-unique-id": "^4.4.4"
+  },
+  "devDependencies": {
+    "serverless-offline": "^11.2.3"
+  }
+}

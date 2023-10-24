@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="stylesheet" href="dist/xspreadsheet.css">
+  <script src="dist/xspreadsheet.js"></script>
 </head>
 <body onload="load()">
   <div style="position: fixed; right: 0; top: .3em;">
@@ -53,7 +55,8 @@
       previewEl.width = 16
       previewEl.height = 16
 
-      var xs = x_spreadsheet('#x-spreadsheet-demo', {
+      var xs;
+      window.xs = x_spreadsheet('#x-spreadsheet-demo', {
         showToolbar: true,
         showGrid: true,
         showBottomBar: true,
@@ -105,7 +108,7 @@
           // console.log(cdata);
           console.log('>>>', xs.getData());
         });
-
+      xs = window.xs;
       xs.on('cell-selected', (cell, ri, ci) => {
           console.log('cell:', cell, ', ri:', ri, ', ci:', ci);
         }).on('cell-edited', (text, ri, ci) => {

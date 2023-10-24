@@ -27,7 +27,7 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --open --config build/webpack.dev.js",
-    "build": "webpack --config build/webpack.prod.js && cp /home/vhi/gits-and-pieces/myliang/dist/xspreadsheet.js \"/home/vhi/src/js/10 xspreadsheet.js\" && cp /home/vhi/gits-and-pieces/myliang/dist/58eaeb4e52248a5c75936c6f4c33a370.svg /home/vhi/img/x-spreadsheet-sprites.svg",
+    "build": "webpack --config build/webpack.prod.js",
     "build-locale": "webpack --config build/webpack.locale.js",
     "lint": "./node_modules/eslint/bin/eslint.js src",
     "test": "nyc ./node_modules/mocha/bin/mocha --require @babel/register --recursive test",

@@ -1,6 +1,7 @@
 import { h } from './element';
 import { cssPrefix } from '../config';
 import { CellRange } from '../core/cell_range';
+import helper from '../core/helper';
 
 const selectorHeightBorderWidth = 2 * 2 - 1;
 let startZIndex = 10;
@@ -13,6 +14,7 @@ class SelectorElement {
     this.cornerEl = h('div', `${cssPrefix}-selector-corner`);
     this.areaEl = h('div', `${cssPrefix}-selector-area`)
       .child(this.cornerEl).hide();
+    this.areas = [];
     this.clipboardEl = h('div', `${cssPrefix}-selector-clipboard`).hide();
     this.autofillEl = h('div', `${cssPrefix}-selector-autofill`).hide();
     this.el = h('div', `${cssPrefix}-selector`)
@@ -28,6 +30,20 @@ class SelectorElement {
       this.el.child(this.hideInputDiv = h('div', 'hide-input').child(this.hideInput));
     }
     startZIndex += 1;
+  }
+
+  shiftRange() {
+    let { areaEl, cornerEl } = this;
+    let tempEl = h('div', `${cssPrefix}-selector-area`).child(cornerEl);
+    this.areas.push(areaEl);
+    this.areaEl = tempEl;
+    this.el.children(this.areaEl);
+  }
+  clearRanges() {
+    this.areas.forEach(function(area) {
+      area.el.remove();
+    });
+    this.areas = [];
   }
 
   setOffset(v) {
@@ -184,7 +200,7 @@ function setTClipboardOffset(offset) {
   t.setClipboardOffset(calTAreaOffset.call(this, offset));
 }
 
-function setAllAreaOffset(offset) {
+function setAllAreaOffset(offset) { console.log("setAllAreaOffset:",offset);
   setBRAreaOffset.call(this, offset);
   setTLAreaOffset.call(this, offset);
   setTAreaOffset.call(this, offset);
@@ -215,6 +231,7 @@ export default class Selector {
     this.areaOffset = null;
     this.indexes = null;
     this.range = null;
+    this.ranges = [];
     this.arange = null;
     this.el = h('div', `${cssPrefix}-selectors`)
       .children(
@@ -234,6 +251,7 @@ export default class Selector {
   resetData(data) {
     this.data = data;
     this.range = data.selector.range;
+    this.ranges = [];
     this.resetAreaOffset();
   }
 
@@ -289,8 +307,31 @@ export default class Selector {
     this.resetOffset();
   }
 
-  set(ri, ci, indexesUpdated = true) {
+  shiftRange() {
+    this.ranges.push(helper.cloneDeep(this.range));
+    this.br.shiftRange();
+    this.l.shiftRange();
+    this.t.shiftRange();
+    this.tl.shiftRange();
+  }
+  clearRange() {
+    this.ranges = [];
+    this.br.clearRanges();
+    this.l.clearRanges();
+    this.t.clearRanges();
+    this.tl.clearRanges();
+  }
+
+  set(ri, ci, indexesUpdated = true, initAdditionalRange = false) {
     const { data } = this;
+
+    if (initAdditionalRange) {
+      this.shiftRange();
+    } else {
+      this.clearRange();
+    }
+    data.setAdditionalRanges(this.ranges);
+
     const cellRange = data.calSelectedRangeByStart(ri, ci);
     const { sri, sci } = cellRange;
     if (indexesUpdated) {
@@ -309,13 +350,14 @@ export default class Selector {
     this.el.show();
   }
 
-  setEnd(ri, ci, moving = true) {
+  setEnd(ri, ci, moving = true, initAdditionalRange = false) {
     const { data, lastri, lastci } = this;
     if (moving) {
       if (ri === lastri && ci === lastci) return;
       this.lastri = ri;
       this.lastci = ci;
     }
+    if (initAdditionalRange) console.log("selector.setEnd w/ additionalRange ???");
     this.range = data.calSelectedRangeByEnd(ri, ci);
     setAllAreaOffset.call(this, this.data.getSelectedRect());
   }
