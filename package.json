@@ -5,8 +5,10 @@
   "types": "src/index.d.ts",
   "main": "src/index.js",
   "files": [
+    "build",
     "assets",
-    "dist"
+    "dist",
+    "src"
   ],
   "author": "myliang <liangyuliang0335@gmail.com>",
   "license": "MIT",
