@@ -7,13 +7,14 @@
   "files": [
     "assets",
     "dist",
+    "build",
     "src"
   ],
   "author": "myliang <liangyuliang0335@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/myliang/x-spreadsheet.git"
+    "url": "https://github.com/talonicdev/x-spreadsheet.git"
   },
   "nyc": {
     "all": true,
