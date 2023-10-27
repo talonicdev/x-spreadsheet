@@ -591,7 +591,7 @@ body {
 }
 .x-spreadsheet-calendar .calendar-body th,
 .x-spreadsheet-calendar .calendar-body td {
-  width: 14.28571429%;
+  width: 100%/7;
   min-width: 32px;
   text-align: center;
   font-weight: 700;
@@ -849,7 +849,7 @@ form fieldset select {
   line-height: 0;
 }
 .x-spreadsheet-icon .x-spreadsheet-icon-img {
-  background-image: url(58eaeb4e52248a5c75936c6f4c33a370.svg);
+  background-image: url(7c76e917e03e57c2dba5.svg);
   position: absolute;
   width: 262px;
   height: 444px;
