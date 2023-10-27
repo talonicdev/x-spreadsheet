@@ -7,7 +7,6 @@ import { cssPrefix } from './config';
 import { locale } from './locale/locale';
 import API from './component/api';
 import * as Utils from './core/utils';
-import './index.less';
 
 
 class Spreadsheet {

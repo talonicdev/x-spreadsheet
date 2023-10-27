@@ -5,6 +5,7 @@
   "types": "src/index.d.ts",
   "main": "src/index.js",
   "files": [
+    "build",
     "assets",
     "dist",
     "src"
@@ -13,7 +14,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/myliang/x-spreadsheet.git"
+    "url": "https://github.com/talonicdev/x-spreadsheet.git"
   },
   "nyc": {
     "all": true,
