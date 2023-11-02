@@ -686,7 +686,7 @@ function sheetInitEvents() {
     horizontalScrollbarMove.call(this, distance, evt);
   };
   // editor
-  editor.change = (state, itext) => { console.log("editor.change",state,itext);
+  editor.change = (state, itext) => { //console.log("editor.change",state,itext);
     dataSetCellText.call(this, itext, state);
   };
   // modal validation

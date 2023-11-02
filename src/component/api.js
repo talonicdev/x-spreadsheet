@@ -41,7 +41,7 @@ export default class API {
 
         if (!oCoordsStart && !oCoordsEnd) return null;
         if (oCoordsStart && !oCoordsEnd) return this.selectCell(oCoordsStart);
-        console.log("Setting Cell Range: "+oCoordsStart.ri+"/"+oCoordsStart.ci+" - "+oCoordsEnd.ri+"/"+oCoordsEnd.ci,sShorthandStart,sShorthandEnd);
+        //console.log("Setting Cell Range: "+oCoordsStart.ri+"/"+oCoordsStart.ci+" - "+oCoordsEnd.ri+"/"+oCoordsEnd.ci,sShorthandStart,sShorthandEnd);
         this.ref.sheet.selector.reset();
         this.ref.sheet.selector.set(oCoordsStart.ri,oCoordsStart.ci);
         this.ref.sheet.selector.setEnd(oCoordsEnd.ri,oCoordsEnd.ci,false);

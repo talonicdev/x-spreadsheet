@@ -200,7 +200,7 @@ function setTClipboardOffset(offset) {
   t.setClipboardOffset(calTAreaOffset.call(this, offset));
 }
 
-function setAllAreaOffset(offset) { console.log("setAllAreaOffset:",offset);
+function setAllAreaOffset(offset) {
   setBRAreaOffset.call(this, offset);
   setTLAreaOffset.call(this, offset);
   setTAreaOffset.call(this, offset);
@@ -357,7 +357,7 @@ export default class Selector {
       this.lastri = ri;
       this.lastci = ci;
     }
-    if (initAdditionalRange) console.log("selector.setEnd w/ additionalRange ???");
+    //if (initAdditionalRange) console.log("selector.setEnd w/ additionalRange ???");
     this.range = data.calSelectedRangeByEnd(ri, ci);
     setAllAreaOffset.call(this, this.data.getSelectedRect());
   }
