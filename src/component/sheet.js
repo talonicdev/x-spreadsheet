@@ -511,15 +511,15 @@ function colResizerFinished(cRect, distance) {
 }
 
 function dataSetCellText(text, state = 'finished') {
-  const { data, table } = this; console.log("dataSetCellText:",text,state,data.settings.mode);
+  const { data, table } = this;
   // const [ri, ci] = selector.indexes;
   if (data.settings.mode === 'read') return;
   data.setSelectedCellText(text, state);
   const { ri, ci } = data.selector;
-  if (state === 'finished') { console.log("state is finished.");
+  if (state === 'finished') {
     this.trigger('cell-edited', text, ri, ci);
     table.render();
-  } else { console.log("state is else.");
+  } else {
     this.trigger('cell-edited', text, ri, ci);
   }
 }
@@ -643,9 +643,7 @@ function sheetInitEvents() {
       if (offsetX <= 0) rowResizer.hide();
     })
     .on('paste', (evt) => {
-      console.log("paste!");
-      console.log(evt);
-      console.log(evt.clipboardData);
+      //  console.log("paste event:",evt.clipboardData);
     });
 
   selector.inputChange = (v) => {
@@ -881,7 +879,7 @@ function sheetInitEvents() {
         || (keyCode >= 96 && keyCode <= 105)
         || evt.key === '='
       ) {
-        console.log("anyKey after call:",evt.key);
+        //console.log("anyKey after call:",evt.key);
         editorSet.call(this);
         //dataSetCellText.call(this, evt.key, 'input');
       } else if (keyCode === 113) {

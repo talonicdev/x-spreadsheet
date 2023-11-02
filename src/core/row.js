@@ -90,7 +90,7 @@ class Rows {
   }
 
   // what: all | text | format
-  setCell(ri, ci, cell, what = 'all') { console.log("setCell:",ri,ci,cell,what);
+  setCell(ri, ci, cell, what = 'all') { //console.log("setCell:",ri,ci,cell,what);
     const row = this.getOrNew(ri);
     if (what === 'all') {
       row.cells[ci] = cell;

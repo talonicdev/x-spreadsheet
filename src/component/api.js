@@ -11,13 +11,6 @@ import { CellRange } from '../core/cell_range';
 //import { Utils } from '../core/utils';
 import * as Utils from '../core/utils';
 
-function test(str) {
-    console.log("API called!");
-    console.log(str);
-    console.log("this is:");
-    console.log(this);
-}
-
 export default class API {
 
     constructor(mainReference) {
