@@ -1020,7 +1020,7 @@ export default class DataProxy {
   getCellStyleOrDefault(ri, ci) {
     const { styles, rows } = this;
     const cell = rows.getCell(ri, ci);
-    const cellStyle = (cell && cell.style !== undefined) ? styles[cell.style] : {};
+    const cellStyle = (cell && cell.style !== undefined) ? (styles[cell.style] || {}) : {};
     //cellStyle.bgcolor = "#ff0000";  // #DEBUG BGColor Override
     return helper.merge(this.defaultStyle(), cellStyle);
   }
@@ -1213,7 +1213,7 @@ export default class DataProxy {
   }
 
   defaultStyle() {
-    return this.settings.style;
+    return this.settings.style || {};
   }
 
   addStyle(nstyle) {
