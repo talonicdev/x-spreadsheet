@@ -514,13 +514,13 @@ function dataSetCellText(text, state = 'finished') {
   const { data, table } = this;
   // const [ri, ci] = selector.indexes;
   if (data.settings.mode === 'read') return;
-  data.setSelectedCellText(text, state);
+  const oldText = data.setSelectedCellText(text, state);
   const { ri, ci } = data.selector;
   if (state === 'finished') {
-    this.trigger('cell-edited', text, ri, ci);
+    this.trigger('cell-edited', text, ri, ci, oldText, state);
     table.render();
   } else {
-    this.trigger('cell-edited', text, ri, ci);
+    this.trigger('cell-edited', text, ri, ci, oldText, state);
   }
 }
 
