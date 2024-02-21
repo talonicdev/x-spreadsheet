@@ -649,7 +649,7 @@ export default class DataProxy {
     }
     const oldCell = rows.getCell(nri, ci);
     const oldText = oldCell ? oldCell.text : '';
-    this.setCellText(nri, ci, text, state, oldText);
+    this.setCellText(nri, ci, text, state, true);
     // replace filter.value
     if (autoFilter.active()) {
       const filter = autoFilter.getFilter(ci);
@@ -1032,7 +1032,7 @@ export default class DataProxy {
   }
 
   // state: input | finished
-  setCellText(ri, ci, text, state, oldText) {
+  setCellText(ri, ci, text, state, bDontTriggerChangeEvent) {
     const { rows, history, validations } = this;
     if (state === 'finished') {
       rows.setCellText(ri, ci, '');
@@ -1041,7 +1041,7 @@ export default class DataProxy {
     } else {
       rows.setCellText(ri, ci, text);
       // TODO: Remove change event? => Reduce compute on regular cell text change, maybe introduce other event instead
-      this.change(this.getData());
+      if (!bDontTriggerChangeEvent) this.change(this.getData());
     }
     // validator
     validations.validate(ri, ci, text);
